@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>servlets.WelcomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>welcome</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>ServiceServlet</servlet-name>
+        <servlet-class>servlets.ServiceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServiceServlet</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>servlets.ErrorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListProjectsServlet</servlet-name>
+        <servlet-class>servlets.project.ListProjectsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListProjectsServlet</servlet-name>
+        <url-pattern>/listProject</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddProjectServlet</servlet-name>
+        <servlet-class>servlets.project.AddProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddProjectServlet</servlet-name>
+        <url-pattern>/addProject</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>UpdateProjectServlet</servlet-name>
+        <servlet-class>servlets.project.UpdateProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProjectServlet</servlet-name>
+        <url-pattern>/updateProject</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DeleteProjectServlet</servlet-name>
+        <servlet-class>servlets.project.DeleteProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteProjectServlet</servlet-name>
+        <url-pattern>/deleteProject</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ListTasksServlet</servlet-name>
+        <servlet-class>servlets.task.ListTasksServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListTasksServlet</servlet-name>
+        <url-pattern>/listTask</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>servlets.task.AddTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <url-pattern>/addTask</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ListResourcesServlet</servlet-name>
+        <servlet-class>servlets.resource.ListResourcesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListResourcesServlet</servlet-name>
+        <url-pattern>/listResource</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddResourceServlet</servlet-name>
+        <servlet-class>servlets.resource.AddResourceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddResourceServlet</servlet-name>
+        <url-pattern>/addResource</url-pattern>
+    </servlet-mapping>
+
+</web-app>
