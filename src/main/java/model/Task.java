@@ -24,9 +24,20 @@ public class Task {
         this.status = status;
     }
 
-    public Task(int taskId, String taskName, String description, Date startDate, Date endDate, Status status) {
-        this.taskId = taskId;
+    public Task(String taskName, String taskImg, String description, Date startDate, Date endDate, Status status, int taskId) {
         this.taskName = taskName;
+        this.taskImg = taskImg;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.taskId = taskId;
+    }
+
+    public Task(Project project, String taskName, String taskImg, String description, Date startDate, Date endDate, Status status) {
+        this.project = project;
+        this.taskName = taskName;
+        this.taskImg = taskImg;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -91,5 +102,19 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", project=" + project +
+                ", taskName='" + taskName + '\'' +
+                ", taskImg='" + taskImg + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status=" + status +
+                '}';
     }
 }

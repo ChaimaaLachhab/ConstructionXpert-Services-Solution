@@ -1,8 +1,9 @@
 package servlets.project;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.ProjectDaoImp;
 import model.Project;
 import model.ProjectType;
-import model.ResourceType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet("/AddProjectServlet")
 public class AddProjectServlet extends HttpServlet {
     private ProjectDaoImp projectDao;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void init() {
@@ -29,19 +31,21 @@ public class AddProjectServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String projectName = request.getParameter("projectName");
-        String projectImg = request.getParameter("projectImg");
-        String description = request.getParameter("description");
-        Date startDate = Date.valueOf(request.getParameter("startDate"));
-        Date endDate = Date.valueOf(request.getParameter("endDate"));
-        double budget = Double.parseDouble(request.getParameter("budget"));
-        String type = request.getParameter("projectType");
+        Map<String, String> jsonMap = objectMapper.readValue(request.getInputStream(), Map.class);
+
+        String projectName = jsonMap.get("projectName");
+        String projectImg = jsonMap.get("projectImg");
+        String description = jsonMap.get("description");
+        Date startDate = Date.valueOf(jsonMap.get("startDate"));
+        Date endDate = Date.valueOf(jsonMap.get("endDate"));
+        double budget = Double.parseDouble(jsonMap.get("budget"));
+        String type = jsonMap.get("projectType");
         ProjectType projectType = ProjectType.valueOf(type);
 
         Project newProject = new Project(projectName, projectImg, description, startDate, endDate, budget, projectType);
 
         projectDao.create(newProject);
 
-        response.sendRedirect(request.getContextPath() + "allProjects");
+        response.sendRedirect(request.getContextPath() + "/allProjects");
     }
 }

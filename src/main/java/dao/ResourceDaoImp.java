@@ -15,22 +15,24 @@ public class ResourceDaoImp implements ResourceDao {
 
     @Override
     public void createResource(Resource resource) {
-        String sql = "INSERT INTO resources (resource_name, resource_img, type, quantity, supplier_information) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO resources (task_id, resource_name, resource_img, type, quantity, supplier_information) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, resource.getResourceName());
-            statement.setString(2, resource.getResourceImg());
-            statement.setString(3, resource.getType().toString());
-            statement.setInt(4, resource.getQuantity());
-            statement.setString(5, resource.getSupplierInformation());
+            statement.setInt(1, resource.getTask().getTaskId());
+            statement.setString(2, resource.getResourceName());
+            statement.setString(3, resource.getResourceImg());
+            statement.setString(4, resource.getType().toString());
+            statement.setInt(5, resource.getQuantity());
+            statement.setString(6, resource.getSupplierInformation());
 
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void updateResource(Resource resource) {

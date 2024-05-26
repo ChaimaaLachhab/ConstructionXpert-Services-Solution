@@ -15,17 +15,19 @@ public class TaskDaoImp implements TaskDao {
 
     @Override
     public void addTask(Task task) {
-        String sql = "INSERT INTO tasks (task_name, task_img, description, start_date, end_date, status) " +
-                "VALUES (?, ?, ?, ?, ?)";
+
+        String sql = "INSERT INTO tasks (project_id, task_name, task_img, description, start_date, end_date, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, task.getTaskName());
-            statement.setString(2, task.getTaskImg());
-            statement.setString(3, task.getDescription());
-            statement.setDate(4, task.getStartDate());
-            statement.setDate(5, task.getEndDate());
-            statement.setString(6, task.getStatus().toString());
+            statement.setInt(1, task.getProject().getProjectId());
+            statement.setString(2, task.getTaskName());
+            statement.setString(3, task.getTaskImg());
+            statement.setString(4, task.getDescription());
+            statement.setDate(5, task.getStartDate());
+            statement.setDate(6, task.getEndDate());
+            statement.setString(7, task.getStatus().toString());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -38,6 +40,9 @@ public class TaskDaoImp implements TaskDao {
         String sql = "UPDATE tasks SET task_name=?, task_img=?, description=?, start_date=?, end_date=?, status=? WHERE task_id=?";
         try (Connection connection = DataBaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            System.out.println("Updating task: " + task);
+
             statement.setString(1, task.getTaskName());
             statement.setString(2, task.getTaskImg());
             statement.setString(3, task.getDescription());
@@ -45,11 +50,16 @@ public class TaskDaoImp implements TaskDao {
             statement.setDate(5, task.getEndDate());
             statement.setString(6, task.getStatus().toString());
             statement.setInt(7, task.getTaskId());
-            statement.executeUpdate();
+
+            int rowsUpdated = statement.executeUpdate();
+            System.out.println("Rows updated: " + rowsUpdated);
+
         } catch (SQLException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void deleteTask(Task task) {

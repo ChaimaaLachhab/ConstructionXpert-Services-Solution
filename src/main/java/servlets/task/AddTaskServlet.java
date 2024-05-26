@@ -1,7 +1,9 @@
 package servlets.task;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.ProjectDaoImp;
 import dao.TaskDaoImp;
+import model.Project;
 import model.Status;
 import model.Task;
 
@@ -13,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet("/AddTaskServlet")
 public class AddTaskServlet extends HttpServlet {
     private TaskDaoImp taskDao;
     private ProjectDaoImp projectDao;
+    private ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Override
     public void init() {
@@ -36,17 +41,27 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int projectId = Integer.parseInt(request.getParameter("projectId"));
-        String taskName = request.getParameter("taskName");
-        String taskImg = request.getParameter("taskImg");
-        String description = request.getParameter("description");
-        Date startDate = Date.valueOf(request.getParameter("startDate"));
-        Date endDate = Date.valueOf(request.getParameter("endDate"));
-        Status status = Status.valueOf(request.getParameter("status"));
+        Map<String, String> jsonMap = objectMapper.readValue(request.getInputStream(), Map.class);
+        int projectId = Integer.parseInt(jsonMap.get("projectId"));
+        Project project = projectDao.getProject(projectId);
+        System.out.println("projectId");
+        String taskName = jsonMap.get("taskName");
+        System.out.println("taskName");
+        String taskImg = jsonMap.get("taskImg");
+        System.out.println("taskImg");
+        String description = jsonMap.get("description");
+        System.out.println("description");
+        Date startDate = Date.valueOf(jsonMap.get("startDate"));
+        System.out.println("startDate");
+        Date endDate = Date.valueOf(jsonMap.get("endDate"));
+        System.out.println("endDate");
+        Status status = Status.valueOf(jsonMap.get("taskStatus"));
+        System.out.println("status");
 
-        Task newTask = new Task(taskName, taskImg, description, startDate, endDate, status);
-
+        Task newTask = new Task(project,taskName, taskImg, description, startDate, endDate, status);
+        System.out.println("new task" + newTask.toString());
         taskDao.addTask(newTask);
+        System.out.println("goooooooooooooooooooooooooooooooood");
             response.sendRedirect(request.getContextPath() + "/allTasks?projectId=" + projectId);
     }
 }

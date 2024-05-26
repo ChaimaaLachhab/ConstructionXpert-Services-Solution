@@ -54,6 +54,9 @@
                             <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Show
                             All
                         </label>
+                        <label class="active" style="border-radius: 500px; padding-left: 8px; width: 45px; height: 45px; position: absolute; right: 100px; top: 20px;">
+                            <a href="${pageContext.request.contextPath}/updateProject?projectId=${oneProject.projectId}"><i class="ri-add-line" style="font-size: 30px; color: white;"></i></a>
+                        </label>
                         <label class="active" style="border-radius: 500px; padding-left: 8px; width: 45px; height: 45px; position: absolute; right: 15px; top: 20px;">
                             <a href="${pageContext.request.contextPath}/addTask?projectId=${oneProject.projectId}"><i class="ri-add-line" style="font-size: 30px; color: white;"></i></a>
                         </label>
@@ -67,7 +70,7 @@
                                     <div class="tasks__image">
                                         <img src="${task.taskImg}" alt="image" class="tasks__img" style="display: block;">
 
-                                        <a href="${pageContext.request.contextPath}/allResources?taskId=${task.taskId}" class="tasks__button button">
+                                        <a href="${pageContext.request.contextPath}/allResources?taskId=${task.taskId}&projectId=${oneProject.projectId}" class="tasks__button button">
                                             <i class="ri-arrow-right-up-line"></i>
                                         </a>
                                     </div>

@@ -57,6 +57,9 @@
                             <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Show
                             All
                         </label>
+                        <label class="active" style="border-radius: 500px; padding-left: 8px; width: 45px; height: 45px; position: absolute; right: 100px; top: 20px;">
+                            <a href="${pageContext.request.contextPath}/UpdateTaskServlet?taskId=${oneTask.taskId}&projectId=${projectId}"><i class="ri-add-line" style="font-size: 30px; color: white;"></i></a>
+                        </label>
                         <label class="active" style="border-radius: 500px; padding-left: 8px; width: 45px; height: 45px; position: absolute; right: 15px; top: 20px;">
                             <a href="${pageContext.request.contextPath}/addResource?taskId=${oneTask.taskId}"><i class="ri-add-line" style="font-size: 30px; color: white;"></i></a>
                         </label>

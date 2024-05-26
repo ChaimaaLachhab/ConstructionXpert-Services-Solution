@@ -20,8 +20,7 @@ public class Resource {
         this.supplierInformation = supplierInformation;
     }
 
-    public Resource(int resourceId, Task task, String resourceName, String resourceImg, ResourceType type, int quantity, String supplierInformation) {
-        this.resourceId = resourceId;
+    public Resource(Task task, String resourceName, String resourceImg, ResourceType type, int quantity, String supplierInformation) {
         this.task = task;
         this.resourceName = resourceName;
         this.resourceImg = resourceImg;

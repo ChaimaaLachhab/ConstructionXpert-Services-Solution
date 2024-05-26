@@ -29,6 +29,8 @@ public class ListResourcesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        request.setAttribute("projectId", projectId);
         int taskId = Integer.parseInt(request.getParameter("taskId"));
         Task oneTask = taskDao.getTask(taskId);
         request.setAttribute("oneTask", oneTask);
